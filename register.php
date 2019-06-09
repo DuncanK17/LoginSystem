@@ -5,6 +5,7 @@
         header("Location: login.php");
     }
 
+    // link to the file with the connection to your database here
     require_once '../includes/connect.php';   
 
     $uName = '';
@@ -18,7 +19,8 @@
         $salted = "09696as0df678a4asd3af81hgf4".$pass1."9sa6fdt32gsda";
 
         $hashed = hash('sha512', $salted);
-
+        
+        // insert the username and safe password into your database
         $query = "INSERT INTO users (uName, pass) VALUES ('$uName', '$hashed')";
 
         $result = mysqli_query($db, $query) or die("Bad boy: $query");
@@ -31,7 +33,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>Register</title>
 </head>
 <body>
@@ -39,7 +40,7 @@
     <form action="" method="post">
         <input type="text" name="uName" id="uName" placeholder="username">
         <input type="text" name="pass1" id="pass1" placeholder="password">
-        <input type="submit" value="Verstuur">
+        <input type="submit" value="Send">
     </form>
 
 </body>
