@@ -1,6 +1,7 @@
 <?php
     session_start();
 
+    // link to the file with the connection to your database here
     require_once '../includes/connect.php';
 
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
@@ -25,7 +26,7 @@
 
             header('Location: index.php');
         } else {
-            $out = "Probeer opnieuw";
+            $out = "Try again";
         }
     }
 ?>
@@ -37,22 +38,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/admin.css">
-    <title>Mii-fit Admin</title>
+    <title>Login</title>
 </head>
 <body>
 
 <div>
     <h1>Login</h1>
-    <h2>Log eerst in voor u gebruikt kunt maken van deze website</h2>
+    <h2>Log in before you can use this website</h2>
 </div>
 
 <div>
     <form action="login.php" method="post">
-        <label for="username">Gebruikersnaam</label>
+        <label for="username"Username</label>
         <input type="text" id="username" name="username">
 
-        <label for="password">Wachtwoord</label>
+        <label for="password">Password</label>
         <input type="password" id="password" name="password">
 
         <input type="submit" name="submit">
