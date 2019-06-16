@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+// check if logged in or not
+// if not, head to login page
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
     header("Location: login.php");
 }
