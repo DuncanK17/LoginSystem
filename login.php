@@ -4,28 +4,39 @@
     // link to the file with the connection to your database here
     require_once '../includes/connect.php';
 
+    // check if allready logged in
+    // if so, head to index.php
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
         header('Location: index.php');
     }
-
+    
+    // declare empty variable output for feedback if login fails
     $out = '';
 
+    // check if form was sent
     if(isset($_POST['username'])){
+        //take username and password out of form and secure them
         $uName = mysqli_real_escape_string($db, $_POST['username']);
         $passW = mysqli_real_escape_string($db, $_POST['password']);
 
+        // salt the password
         $salted = "09696as0df678a4asd3af81hgf4".$passW."9sa6fdt32gsda";
         
+        // hash the password
         $hashed = hash('sha512', $salted);
 
+        // check the input with combinations in the database
         $query = "SELECT 1 FROM users WHERE uName = '$uName' AND pass = '$hashed'";
         $result = mysqli_query($db, $query);
 
+        // if there is a match, log in
         if(mysqli_num_rows($result) > 0){
             $_SESSION['logged_in'] = true;
 
             header('Location: index.php');
-        } else {
+        } 
+        // else give feedback
+        else {
             $out = "Try again";
         }
     }
